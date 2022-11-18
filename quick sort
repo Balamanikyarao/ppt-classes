@@ -1,0 +1,41 @@
+#include<stdio.h>
+int part(int A[],int l,int h)
+{
+    int pivot=A[h];
+    int temp,i,j=l-1;
+    for(i=l;i<=h-1;i++)
+    {
+        if(A[i]<pivot)
+        {
+            j++;
+            temp=A[j];
+            A[j]=A[i];
+            A[i]=temp;
+        }
+    }
+    temp=A[j+1];
+    A[j+1]=A[h];
+    A[h]=temp;
+    return j+1;
+   }
+void quicksort(int A[],int l,int h)
+{
+    if(l<h)
+    {
+        int pp=part(A,l,h);
+        quicksort(A,l,pp-1);
+        quicksort(A,pp+1,h);
+    }
+}
+int main (void)
+{
+    int A[]={56,12,32,6,94,72,22,45,29};
+    int n=sizeof(A)/sizeof(A[0]);
+    quicksort(A,0,n-1);
+    for(int i=0;i<n;i++)
+    {
+        printf("%d\t",A[i]);
+    }
+    return 0;
+}
+
